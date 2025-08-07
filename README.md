@@ -74,6 +74,16 @@ sudo docker compose up -d
 Check the status of the core if all NF are healthy 
 `docker ps -a`
 
+View the oai-lmf and oai-amf logs:
+```
+docker logs oai-amf -f
+docker logs oai-lmf -f
+```
+To export the logs for debugging, each command can be executed with:
+```
+commands | tee ~/Path/to/save/logs/filename.log
+```
+
 To stop the core
 `sudo docker compose -f docker-compose.yaml down`
 
@@ -84,8 +94,38 @@ Open a terminal
 cd OAI_RAN/openairinterface5g/cmake_targets/ran_build/build 
 sudo ./nr-softmodem --rfsim --rfsimulator.serveraddr server --sa -O [path/to/conf/2x2.conf] --rfsimulator.options chanmod --gNB.[0].min_rxtxtime 6 --telnetsrv --T_stdout 2
 ```
-Make sure to have channelmod conf file in conf folder for rfsimulator testing
+Make sure to have channelmod conf file in conf folder for rfsimulator testing:
 
+```
+#/* configuration for channel modelisation */
+#/* To be included in main config file when */
+#/* channel modelisation is used (rfsimulator with chanmod options enabled) */
+channelmod = { 
+  max_chan=10;
+  modellist="modellist_rfsimu_1";
+  modellist_rfsimu_1 = (
+    {
+        model_name                       = "rfsimu_channel_enB0" # Applied to the DL
+      	type                             = "AWGN";			  
+      	ploss_dB                         = 0;
+        noise_power_dB                   = -100; 
+        forgetfact                       = 0;  
+        offset                           = 0;       # 16 samples -> 80 m -> 1 TA
+        ds_tdl                           = 0;     
+    },
+    {
+        model_name                       = "rfsimu_channel_ue0" # Applied to the UL
+      	type                             = "Rice1";			  
+      	ploss_dB                         = 0;
+        noise_power_dB                   = -100; 
+        forgetfact                       = 0;  
+        offset                           = 20;      
+        ds_tdl                           = 0;      
+    }    
+  );  
+};
+
+```
 
 #### Create a new file called "ue.sa.conf" and add
 ```
@@ -174,6 +214,12 @@ impulse_response = reshape(IQ, Nfft, []);
 
 % Close file
 fclose(fileID);
+```
+
+### Step 8: Dynamically change the Offset parameter
+```
+telnet 127.0.0.81 9081
+channelmod modify 1 offset [value]
 ```
 
 ## Part 2: Multi gNB (on same host)
