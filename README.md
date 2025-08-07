@@ -1,5 +1,6 @@
 # OAI-based-Positioning-Setup 🚀
 This repository will accompany the research paper: A Framework for UL-TDoA-based 5G Positioning Experimentation using OAI.
+Author: Herman Blackie (herman.blackie@nwu.ac.za)
 
 This is an adaption and improvement build on the work in: [OAI-NRPPA-PROCEDURES](https://gitlab.eurecom.fr/oai/openairinterface5g/-/blob/NRPPA_Procedures/doc/tutorial_resources/Positioning%20Tutorial/Positioning%20Testing%20Setup%20Guide.docx?ref_type=heads)
 
