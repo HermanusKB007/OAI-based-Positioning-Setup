@@ -251,9 +251,6 @@ sudo ./nr-softmodem --rfsim --rfsimulator.serveraddr 127.0.0.1 --sa -O ~/OAI_RAN
 sudo ./nr-softmodem --rfsim --rfsimulator.serveraddr 127.0.0.1 --sa -O ~/OAI_RAN/doc/tutorial_resources/positioning_tutorial/conf/gnb3.conf
 ```
 
-Here in this example, just to check multiple TRPs is working fine, we are running gNB 1 with 4 TRPs, gNB 2 with 2 TRPs, and gNB3 with 1 TRP. So in our measurement response, each gNB should be sending ToA as per their TRP number.
-
-
 ### Initiate the localization procedure
 
 ```
