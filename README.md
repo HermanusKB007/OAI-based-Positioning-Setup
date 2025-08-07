@@ -158,12 +158,13 @@ rfsimulator :
 ### Step 6 Starting UE 
 Please note: for extra commands use 
 ```
-./nr-uesoftmoden --help
+./nr-softmodem --help
+./nr-uesoftmodem --help
 ```
 Open a terminal 
 ```
 cd OAI_RAN/openairinterface5g/cmake_targets/ran_build/build
-sudo ./nr-uesoftmodem -r 106 --numerology 1 --band 78 -C 3619200000 --rfsim --rfsimulator.serveraddr 127.0.0.1 --sa -O [path/to/conf] --rfsimulator.options chanmod --ue-nb-ant-rx 2 --ue-nb-ant-tx 2 --telnetsrv --telnetsrv.listenport 9090
+sudo ./nr-uesoftmodem -r 106 --numerology 1 --band 78 -C 3619200000 --rfsim --rfsimulator.serveraddr 127.0.0.1 --sa -O [path/to/conf] --rfsimulator.options chanmod --ue-nb-ant-rx [n] --ue-nb-ant-tx [n] --telnetsrv --telnetsrv.listenport 9090
 ```
 
 ### Step 6 External API to initiate Positioning request
@@ -237,7 +238,7 @@ sudo ip address add 192.168.70.143/26 dev oai-cn5g
 In the multi-gNB setup we need to invert the roles of client and server for the rfsimulator to make sure the gNBs are synchronized among themselves. I.e. the UE becomes the rfsimulator server and the gNBs the rfsimulator clients. 
 
 ```
- sudo ./nr-uesoftmodem -r 106 --numerology 1 --band 78 -C 3619200000 --rfsim --sa --rfsimulator.serveraddr server --uicc0.imsi 001010000000001
+sudo ./nr-uesoftmodem -r 106 --numerology 1 --band 78 -C 3619200000 --rfsim --rfsimulator.serveraddr server --sa -O [path/to/conf] --rfsimulator.options chanmod --ue-nb-ant-rx [n] --ue-nb-ant-tx [n] --telnetsrv --telnetsrv.listenport 9090
 ```
 
 ### Start gNBs
