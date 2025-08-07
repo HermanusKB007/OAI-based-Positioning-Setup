@@ -85,7 +85,7 @@ commands | tee ~/Path/to/save/logs/filename.log
 ```
 
 To stop the core
-`sudo docker compose -f docker-compose.yaml down`
+`sudo docker compose down`
 
 ### Step 4 Starting gnb
 
