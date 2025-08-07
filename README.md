@@ -246,9 +246,9 @@ sudo ./nr-uesoftmodem -r 106 --numerology 1 --band 78 -C 3619200000 --rfsim --rf
 Once the core is up and IPs are set we can 
 
 ```
-sudo ./nr-softmodem --rfsim --rfsimulator.serveraddr 127.0.0.1 --sa -O ~/OAI_RAN/doc/tutorial_resources/positioning_tutorial/conf/gnb1.sa.band78.106prb.rfsim4x4.conf
-sudo ./nr-softmodem --rfsim --rfsimulator.serveraddr 127.0.0.1 --sa -O ~/OAI_RAN/doc/tutorial_resources/positioning_tutorial/conf/gnb2.sa.band78.106prb.rfsim2x2.conf
-sudo ./nr-softmodem --rfsim --rfsimulator.serveraddr 127.0.0.1 --sa -O ~/OAI_RAN/doc/tutorial_resources/positioning_tutorial/conf/gnb3.sa.band78.106prb.rfsim.conf
+sudo ./nr-softmodem --rfsim --rfsimulator.serveraddr 127.0.0.1 --sa -O ~/OAI_RAN/doc/tutorial_resources/positioning_tutorial/conf/gnb1.conf
+sudo ./nr-softmodem --rfsim --rfsimulator.serveraddr 127.0.0.1 --sa -O ~/OAI_RAN/doc/tutorial_resources/positioning_tutorial/conf/gnb2.conf
+sudo ./nr-softmodem --rfsim --rfsimulator.serveraddr 127.0.0.1 --sa -O ~/OAI_RAN/doc/tutorial_resources/positioning_tutorial/conf/gnb3.conf
 ```
 
 Here in this example, just to check multiple TRPs is working fine, we are running gNB 1 with 4 TRPs, gNB 2 with 2 TRPs, and gNB3 with 1 TRP. So in our measurement response, each gNB should be sending ToA as per their TRP number.
