@@ -42,6 +42,29 @@ git checkout NRPPA_Procedures / 5ba375c7122dd4d1aabb1ff1d8772cc938201b2d
 ```
 
 ### Step 3 Start the 5G core
+Update the docker-compose.yml file to pull "image: oaisoftwarealliance/oai-lmf:develop" instead of "image: oai-lmf:psoElementwiseTdoAmeanVarTDoAfilter"
+```
+oai-lmf:
+        container_name: "oai-lmf"
+        image: oaisoftwarealliance/oai-lmf:develop
+        #image: oai-lmf:psoElementwiseTdoAmeanVarTDoAfilter 
+        expose:
+            - 80/tcp
+            - 8080/tcp
+        volumes:
+            - ./conf/config.yaml:/openair-lmf/etc/config.yaml
+        environment:
+            - TZ=Europe/Paris
+        depends_on:
+            - mysql
+            - oai-nrf
+            - oai-amf
+        networks:
+            public_net:
+                ipv4_address: 192.168.70.141 
+
+``` 
+Then start the core:
 
 ```
 cd OAI_RAN/openairinterface5g/doc/tutorial_resources/oai-cn5g
