@@ -1,4 +1,4 @@
-# OAI-based-Positioning-Setup
+#🚀 OAI-based-Positioning-Setup
 This repository will accompany the research paper: A Framework for UL-TDoA-based 5G Positioning Experimentation using OAI.
 
 This is an adaption and improvement build on the work in: [OAI-NRPPA-PROCEDURES](https://gitlab.eurecom.fr/oai/openairinterface5g/-/blob/NRPPA_Procedures/doc/tutorial_resources/Positioning%20Tutorial/Positioning%20Testing%20Setup%20Guide.docx?ref_type=heads)
@@ -124,6 +124,35 @@ cd ../ran_build/build/common/utils/T/tracer
 ./record -d ../T_messages.txt -o ~/Desktop/channel_estimates.raw -on GNB_PHY_UL_TIME_CHANNEL_ESTIMATE
 ./extract -d ../T_messages.txt ~/Desktop/... GNB_PHY_UL_TIME_CHANNEL_ESTIMATE chest_t -o ~/Desktop/data.raw -count 100000
 ```
+
+MATLAB script to process the extracted data:
+```
+% Simple SRS data analysis script
+% Based on OAI positioning measurement data
+
+% Set FFT size (adjust as needed)
+Nfft = 2048 / 4096;
+
+% Open the file
+fileID = fopen('extracted.raw');
+
+% Read int16 IQ data
+IQ = fread(fileID,'int16');
+
+% Separate I and Q components
+I = IQ(1:2:end); % separate I
+Q = IQ(2:2:end); % separate Q
+
+% Form a complex signal
+IQ = I + 1j*Q;
+
+% Reshape into FFT-sized chunks
+impulse_response = reshape(IQ, Nfft, []);
+
+% Close file
+fclose(fileID);
+```
+
 ## Part 2: Multi gNB (on same host)
 
 ### Deploy 5G core
